@@ -13,8 +13,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: pieModule
   title: Pie
-  description: Solve the module containing digits of pi... The manual isn't finished
-    yet... Go try to figure it out!
+  description: 'Solve the module containing digits of pi... The manual is incomplete
+    so go try to figure it out!
+
+
+    HTML:
+
+    PDF: https://puu.sh/zLunA.pdf'
   version: 0.1
   outputFolder: C:\Users\kingb\OneDrive\Documents\KTANE Mods\AssetBundles
   previewImage: {fileID: 2800000, guid: bef10bb77979828418c91204aadda54b, type: 3}

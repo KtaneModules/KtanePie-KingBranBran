@@ -195,8 +195,8 @@ public class PieScript : MonoBehaviour {
         // 1st number => If the number is prime.
         order[0] = (new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97 }.Any(x => number == x)) ? 1 : 5;
 
-        // 2nd number => if the digits go from lest to greatest in reading order.
-        if (intCodes[0] <= intCodes[1] && intCodes[1] <= intCodes[2] && intCodes[2] <= intCodes[3] && intCodes[3] <= intCodes[4]) 
+        // 2nd number => if the sum of digits and the number are both even or both odd.
+        if ((sumOfDigits % 2 == 0 && number % 2 == 0) || (sumOfDigits % 2 == 1 && number % 2 == 1))
         {
             order[1] = order[0] == 1 ? 2 : 1;
         }
