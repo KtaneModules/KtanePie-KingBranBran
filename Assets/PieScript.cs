@@ -115,9 +115,15 @@ public class PieScript : MonoBehaviour {
         if (strike)
         {
             foreach (TextMesh buttonText in buttonTexts) {
-                buttonText.color = Color.red;
+                if (buttonText.color != Color.gray)
+                    buttonText.color = Color.red;
             }
             yield return new WaitForSeconds(.5f);
+            foreach (TextMesh buttonText in buttonTexts)
+            {
+                if (buttonText.color != Color.gray)
+                    buttonText.color = Color.green;
+            }
         }
         else
         {
@@ -131,12 +137,23 @@ public class PieScript : MonoBehaviour {
                 buttonText.color = Color.gray;
             }
             yield return new WaitForSeconds(.2f);
+            foreach (TextMesh buttonText in buttonTexts)
+            {
+                buttonText.color = Color.green;
+            }
+            yield return new WaitForSeconds(.2f);
+            foreach (TextMesh buttonText in buttonTexts)
+            {
+                buttonText.color = Color.gray;
+            }
+            yield return new WaitForSeconds(.2f);
+            foreach (TextMesh buttonText in buttonTexts)
+            {
+                buttonText.color = Color.green;
+            }
             SetDisplay(new[] { "", "", "π", "", "" });
         }
-        foreach (TextMesh buttonText in buttonTexts)
-        {
-            buttonText.color = Color.green;
-        }
+       
     }
 
     IEnumerator PlaySolveSound()
