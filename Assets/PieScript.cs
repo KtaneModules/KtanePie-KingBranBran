@@ -13,6 +13,7 @@ public class PieScript : MonoBehaviour {
     public TextMesh[] buttonTexts = new TextMesh[5];
     public string[] soundList = { "C", "D", "E", "F", "G" };
     string[] codes;
+    int[] intCodes;
     int codePlace;
     int[] answer;
     int codesNum;
@@ -22,11 +23,13 @@ public class PieScript : MonoBehaviour {
     private static int _moduleIdCounter = 1;
     private int _moduleId;
     private int[] buttonOrder;
+    int[] pressedButtons = { 0, 0, 0, 0, 0 };
 
 
     void Start () {
         _moduleId = _moduleIdCounter++;
         codes = PickNumber();
+        intCodes = new int[] { int.Parse(codes[0]), int.Parse(codes[0]), int.Parse(codes[0]), int.Parse(codes[0]), int.Parse(codes[0]) };
         codesNum = int.Parse(codes[0] + codes[1] + codes[2] + codes[3] + codes[4]);
         answer = CalculateAnswer();
         buttonOrder = CalculateOrder(answer);
@@ -91,10 +94,11 @@ public class PieScript : MonoBehaviour {
             {
                 stage++;
                 buttonTexts[number].color = Color.gray;
+                // pressedButtons[stage - 1] = number;
             }
             else
             {
-                StartCoroutine(ResetColors(true));
+                // StartCoroutine(ResetColors(true));
                 Pie.HandleStrike();
             }
 
@@ -112,21 +116,23 @@ public class PieScript : MonoBehaviour {
 
     IEnumerator ResetColors(bool strike)
     {
+        // Note: Strike is not in use.
         if (strike)
         {
-            foreach (TextMesh buttonText in buttonTexts) {
-                if (buttonText.color != Color.gray)
-                    buttonText.color = Color.red;
+            for (int i = 0; i < buttonTexts.Length; i++) {
+                if (pressedButtons.All(x => x != i));
+                    buttonTexts[i].color = Color.red;
             }
             yield return new WaitForSeconds(.5f);
-            foreach (TextMesh buttonText in buttonTexts)
+            for (int i = 0; i < buttonTexts.Length; i++)
             {
-                if (buttonText.color != Color.gray)
-                    buttonText.color = Color.green;
+                if (pressedButtons.All(x => x != i));
+                buttonTexts[i].color = Color.green;
             }
         }
         else
         {
+            yield return new WaitForSeconds(.5f);
             foreach (TextMesh buttonText in buttonTexts)
             {
                 buttonText.color = Color.green;            
@@ -158,6 +164,7 @@ public class PieScript : MonoBehaviour {
 
     IEnumerator PlaySolveSound()
     {
+        yield return new WaitForSeconds(.5f);
         Audio.PlaySoundAtTransform("G", Pie.transform);
         yield return new WaitForSeconds(.2f);
         Audio.PlaySoundAtTransform("F", Pie.transform);
@@ -188,8 +195,8 @@ public class PieScript : MonoBehaviour {
         // 1st number => If the number is prime.
         order[0] = (new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97 }.Any(x => number == x)) ? 1 : 5;
 
-        // 2nd number => if the number is even.
-        if (number % 2 == 0) 
+        // 2nd number => if the digits go from lest to greatest in reading order.
+        if (intCodes[0] <= intCodes[1] && intCodes[1] <= intCodes[2] && intCodes[2] <= intCodes[3] && intCodes[3] <= intCodes[4]) 
         {
             order[1] = order[0] == 1 ? 2 : 1;
         }
