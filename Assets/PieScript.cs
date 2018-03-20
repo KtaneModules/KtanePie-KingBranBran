@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class PieScript : MonoBehaviour {
 
-    string pi = "141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909145648566923460348610454326648213393607260249141273724587006606315588174881520920962829254091715364367892590360011330530548820466521384146951941511609433057270365759591953092186117381932611793105118548074462379962749567351885752724891227938183011949129833673362440656643086021394946395224737190702179860943702770539217176293176752384674818467669405132000568127145263560827785771342757789609173637178721468440901224953430146549585371050792279689258923542019956112129021960864034418159813629774771309960518707211349999998372978049951059731732816096318595024459455346908302642522308253344685035261931188171010003137838752886587533208381420617177669147303598253490428755468731159562863882353787593751957781857780532171226806613001927876611195909216420198";
+    string pi = "31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491";
     public KMBombModule Pie;
     public KMAudio Audio;
     public KMSelectable[] buttons = new KMSelectable[5];
@@ -19,23 +19,58 @@ public class PieScript : MonoBehaviour {
     int sumOfDigits;
     int stage = 1;
     bool bombSolved = false;
-    
+    private static int _moduleIdCounter = 1;
+    private int _moduleId;
+    private int[] buttonOrder;
+
 
     void Start () {
+        _moduleId = _moduleIdCounter++;
         codes = PickNumber();
         codesNum = int.Parse(codes[0] + codes[1] + codes[2] + codes[3] + codes[4]);
         answer = CalculateAnswer();
-        
-
-        Pie.OnActivate += Activate();
+        buttonOrder = CalculateOrder(answer);
+        DebugLog("Display is {0} {1} {2} {3} {4}", codes[0], codes[1], codes[2], codes[3], codes[4]);
+        DebugLog("Correct button order: {0} {1} {2} {3} {4}", buttonOrder[0], buttonOrder[1], buttonOrder[2], buttonOrder[3], buttonOrder[4]);
 
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].OnInteract += ButtonPressed(i);
         }
+
+        Pie.OnActivate += Activate();
+
+        
 	}
 
-    KMBombModule.KMModuleActivateEvent Activate()
+    int[] CalculateOrder( int[] list )
+    {
+        int[] order = { 0, 0, 0, 0, 0 };
+
+        for (int i = 0; i < order.Length; i++)
+        {
+            order[i] = FindInList(list, i + 1) + 1;
+        }
+        return order;
+    }
+
+    int FindInList(int[] list, int num)
+    {
+        int number = 0;
+        bool found = false;
+
+        for (int i = 0; !found; i++)
+        {
+            if (list[i] == num)
+            {
+                number = i;
+                found = true;
+            }
+        }
+        return number;
+    }
+
+     KMBombModule.KMModuleActivateEvent Activate()
     {
         return delegate
         {
@@ -47,7 +82,7 @@ public class PieScript : MonoBehaviour {
     {
         return delegate
         {
-            if (!bombSolved)
+            if (bombSolved)
                 return false;
 
             Audio.PlaySoundAtTransform(soundList[stage - 1], Pie.transform);
@@ -125,8 +160,6 @@ public class PieScript : MonoBehaviour {
         sumOfDigits = codesNum.ToString().Sum(x => int.Parse(x.ToString()));
         calculation += codePlace;
         calculation %= 100;
-        print(calculation);
-
         solution = GetOrder(calculation);
         return solution;
     }
@@ -211,15 +244,14 @@ public class PieScript : MonoBehaviour {
             }
         }
 
-        print("" + order[0] + order[1] + order[2] + order[3] + order[4]);
-
         return order;
     }
 
     string[] PickNumber()
     {
-        int i = Random.Range(1, 495);
-        codePlace = i; // Keep track of place
+        int i = Random.Range(0, 495);
+        codePlace = i + 1; // Keep track of place
+        
         char[] piCharArray = pi.ToCharArray();
         string[] stringCharArray = piCharArray.Select(x => x.ToString()).ToArray();
         string[] code = { stringCharArray[i], stringCharArray[i + 1], stringCharArray[i + 2], stringCharArray[i + 3], stringCharArray[i + 4] };
@@ -235,4 +267,11 @@ public class PieScript : MonoBehaviour {
             buttonTexts[i].text = text[i];
         }
     }
+
+    private void DebugLog(string log, params object[] args)
+    {
+        var logData = string.Format(log, args);
+        Debug.LogFormat("[Pie #{0}] {1}", _moduleId, logData);
+    }
 }
+
