@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -104,9 +105,9 @@ public class PieScript : MonoBehaviour {
 
             if (stage == 6)
             {
+                
                 StartCoroutine(ResetColors(false));
-                StartCoroutine(PlaySolveSound());
-                Pie.HandlePass();
+                StartCoroutine(PlaySolveSound()); // Will also handle pass.
                 bombSolved = true;
             }
             return false;
@@ -174,6 +175,8 @@ public class PieScript : MonoBehaviour {
         Audio.PlaySoundAtTransform("E", Pie.transform);
         yield return new WaitForSeconds(.2f);
         Audio.PlaySoundAtTransform("C", Pie.transform);
+        Pie.HandlePass();
+        DebugLog("Module passed!");
     }
 
     
@@ -296,6 +299,31 @@ public class PieScript : MonoBehaviour {
     {
         var logData = string.Format(log, args);
         Debug.LogFormat("[Pie #{0}] {1}", _moduleId, logData);
+    }
+
+    private string TwitchHelpMessage = @"Use !{0} 1 4 5 3 2 to press the buttons in a certain order.";
+
+    private static string[] supportedTwitchCommands = new[] { "press", "click", "submit" };
+
+    IEnumerator ProcessTwitchCommand(string command)
+    {
+        var parts = command.ToLowerInvariant().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+        var skip = 0;
+        if (parts.Length > 0 && supportedTwitchCommands.Contains(parts[0]))
+            skip = 1;
+
+        if (parts.Length > skip && parts.Skip(skip).All(part => part.Length == 1 && "12345".Contains(part)))
+        {
+            yield return null;
+
+            for (int i = skip; i < parts.Length; i++)
+            {
+                int num = Int32.Parse(parts[i]);
+                buttons[num - 1].OnInteract();
+                yield return new WaitForSeconds(.2f);
+            }
+        }
     }
 }
 
