@@ -273,7 +273,7 @@ public class PieScript : MonoBehaviour {
 
     string[] PickNumber()
     {
-        int i = Random.Range(0, 495);
+        int i = Random.Range(0, 496);
         codePlace = i + 1; // Keep track of place
         
         char[] piCharArray = pi.ToCharArray();
