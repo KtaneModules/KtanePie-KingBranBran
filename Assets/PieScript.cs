@@ -55,6 +55,7 @@ public class PieScript : MonoBehaviour {
         {
             order[i] = FindInList(list, i + 1) + 1;
         }
+        DebugLog("Position in pi: {0}", order);
         return order;
     }
 
@@ -101,6 +102,7 @@ public class PieScript : MonoBehaviour {
             {
                 // StartCoroutine(ResetColors(true));
                 Pie.HandleStrike();
+                DebugLog("Strike! Pressed {0}, expected {1}", number, buttonOrder[stage]);
             }
 
             if (stage == 6)
