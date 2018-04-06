@@ -13,6 +13,7 @@ public class PieScript : MonoBehaviour {
     public KMSelectable[] buttons = new KMSelectable[5];
     public TextMesh[] buttonTexts = new TextMesh[5];
     public string[] soundList = { "C", "D", "E", "F", "G" };
+    int calculation;
     string[] codes;
     int[] intCodes;
     int codePlace;
@@ -35,7 +36,10 @@ public class PieScript : MonoBehaviour {
         answer = CalculateAnswer();
         buttonOrder = CalculateOrder(answer);
         DebugLog("Display is {0} {1} {2} {3} {4}", codes[0], codes[1], codes[2], codes[3], codes[4]);
+        DebugLog("Position in pi: {0}", codePlace);
+        DebugLog("X is {0}, Y is {1}", calculation, sumOfDigits % 10);
         DebugLog("Correct button order: {0} {1} {2} {3} {4}", buttonOrder[0], buttonOrder[1], buttonOrder[2], buttonOrder[3], buttonOrder[4]);
+        
 
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -55,7 +59,6 @@ public class PieScript : MonoBehaviour {
         {
             order[i] = FindInList(list, i + 1) + 1;
         }
-        DebugLog("Position in pi: {0}", order);
         return order;
     }
 
@@ -185,12 +188,13 @@ public class PieScript : MonoBehaviour {
     int[] CalculateAnswer()
     {
         int[] solution = { 0, 0, 0, 0, 0 };
-        int calculation = codesNum;
+        calculation = codesNum;
         sumOfDigits = codesNum.ToString().Sum(x => int.Parse(x.ToString()));
         calculation += codePlace;
         calculation %= 100;
         solution = GetOrder(calculation);
         return solution;
+
     }
 
     int[] GetOrder(int number)
