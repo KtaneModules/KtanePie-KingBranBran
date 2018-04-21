@@ -94,7 +94,7 @@ public class PieScript : MonoBehaviour {
                 return false;
 
             Audio.PlaySoundAtTransform(soundList[stage - 1], Pie.transform);
-
+            DebugLog("Pressed {0}, expected {1}", number + 1, buttonOrder[stage - 1]);
             if (answer[number] == stage)
             {
                 stage++;
@@ -104,8 +104,8 @@ public class PieScript : MonoBehaviour {
             else
             {
                 // StartCoroutine(ResetColors(true));
+                DebugLog("Strike!");
                 Pie.HandleStrike();
-                DebugLog("Strike! Pressed {0}, expected {1}", number, buttonOrder[stage]);
             }
 
             if (stage == 6)

@@ -129,7 +129,6 @@ GameObject:
   - component: {fileID: 4265483536090560}
   - component: {fileID: 33868743940776358}
   - component: {fileID: 114582242635100190}
-  - component: {fileID: 65456231435939116}
   m_Layer: 11
   m_Name: Highlight1
   m_TagString: Untagged
@@ -166,7 +165,6 @@ GameObject:
   - component: {fileID: 4209890421193504}
   - component: {fileID: 33200239364107592}
   - component: {fileID: 114623139824872648}
-  - component: {fileID: 65961168996023820}
   m_Layer: 11
   m_Name: Highlight2
   m_TagString: Untagged
@@ -184,7 +182,6 @@ GameObject:
   - component: {fileID: 4862453368724220}
   - component: {fileID: 33192714922360626}
   - component: {fileID: 114557861124466768}
-  - component: {fileID: 65180244453736462}
   m_Layer: 11
   m_Name: Highlight0
   m_TagString: Untagged
@@ -202,7 +199,6 @@ GameObject:
   - component: {fileID: 4275498661761108}
   - component: {fileID: 33824319836085834}
   - component: {fileID: 114169191725717124}
-  - component: {fileID: 65231543127671422}
   m_Layer: 11
   m_Name: Component_Highlight
   m_TagString: Untagged
@@ -272,7 +268,6 @@ GameObject:
   - component: {fileID: 4780428038977218}
   - component: {fileID: 33019520993263478}
   - component: {fileID: 114623697602916208}
-  - component: {fileID: 65115308984021636}
   m_Layer: 11
   m_Name: Highlight3
   m_TagString: Untagged
@@ -345,7 +340,6 @@ GameObject:
   - component: {fileID: 4175448061521100}
   - component: {fileID: 33547784565631016}
   - component: {fileID: 114420125233684734}
-  - component: {fileID: 65350179687827010}
   m_Layer: 11
   m_Name: Highlight4
   m_TagString: Untagged
@@ -1087,78 +1081,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1629416963496576}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65115308984021636
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1673693878636888}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.22388501, y: 0.038265, z: 0.22388503}
-  m_Center: {x: 0.000000044703484, y: 0.0015461985, z: 0.0000000074505815}
---- !u!65 &65180244453736462
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1520531820474654}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.22388501, y: 0.038265, z: 0.223885}
-  m_Center: {x: 0.000000029802322, y: 0.0015462581, z: 0.000000007450581}
---- !u!65 &65231543127671422
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1533477581473938}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.22388498, y: 0.038265, z: 0.223885}
-  m_Center: {x: 0, y: 0.0015462581, z: 0.000000007450581}
---- !u!65 &65350179687827010
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1844210868514260}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.22388501, y: 0.038265, z: 0.22388503}
-  m_Center: {x: 0.000000059604645, y: 0.0015461985, z: 0.0000000074505815}
---- !u!65 &65456231435939116
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1362282659613876}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.22388501, y: 0.038265, z: 0.22388503}
-  m_Center: {x: 0.000000029802322, y: 0.0015461985, z: 0.0000000074505815}
---- !u!65 &65961168996023820
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1416349871169080}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.22388501, y: 0.038265, z: 0.22388503}
-  m_Center: {x: 0.00000003678724, y: 0.0015461985, z: 0.0000000074505815}
 --- !u!102 &102317312861976988
 TextMesh:
   serializedVersion: 3
@@ -1420,7 +1342,7 @@ MonoBehaviour:
   - {fileID: 114081529856262488}
   - {fileID: 114413967705618668}
   IsPassThrough: 0
-  ChildRowLength: 0
+  ChildRowLength: 1
   Highlight: {fileID: 114169191725717124}
   SelectableColliders: []
   DefaultSelectableIndex: 0
