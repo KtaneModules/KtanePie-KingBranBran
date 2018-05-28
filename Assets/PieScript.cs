@@ -26,7 +26,7 @@ public class PieScript : MonoBehaviour {
     private int _moduleId;
     private int[] buttonOrder;
     int[] pressedButtons = { 0, 0, 0, 0, 0 };
-
+    bool solveCoroutineStarted = false;
 
     void Start () {
         _moduleId = _moduleIdCounter++;
@@ -180,6 +180,7 @@ public class PieScript : MonoBehaviour {
         Audio.PlaySoundAtTransform("E", Pie.transform);
         yield return new WaitForSeconds(.2f);
         Audio.PlaySoundAtTransform("C", Pie.transform);
+	solveCoroutineStarted = true;
         Pie.HandlePass();
         DebugLog("Module passed!");
     }
@@ -329,6 +330,11 @@ public class PieScript : MonoBehaviour {
                 buttons[num - 1].OnInteract();
                 yield return new WaitForSeconds(.2f);
             }
+		
+	    if (solveCoroutineStarted)
+	    {
+		    yield return "solve";
+	    }
         }
     }
 }
