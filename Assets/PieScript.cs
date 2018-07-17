@@ -170,6 +170,7 @@ public class PieScript : MonoBehaviour {
 
     IEnumerator PlaySolveSound()
     {
+        solveCoroutineStarted = true;
         yield return new WaitForSeconds(.5f);
         Audio.PlaySoundAtTransform("G", Pie.transform);
         yield return new WaitForSeconds(.2f);
@@ -180,7 +181,6 @@ public class PieScript : MonoBehaviour {
         Audio.PlaySoundAtTransform("E", Pie.transform);
         yield return new WaitForSeconds(.2f);
         Audio.PlaySoundAtTransform("C", Pie.transform);
-	solveCoroutineStarted = true;
         Pie.HandlePass();
         DebugLog("Module passed!");
     }
@@ -269,7 +269,7 @@ public class PieScript : MonoBehaviour {
             }
         }
 
-        // 5th number (and easiest ;D)
+        // 5th number :)
         for (int i = 1; order[4] == 0; i++)
         {
             if (order[0] != i && order[1] != i && order[2] != i && order[3] != i) //Keeps checking high priorities until it finds an empty spot.
@@ -332,9 +332,7 @@ public class PieScript : MonoBehaviour {
             }
 		
 	    if (solveCoroutineStarted)
-	    {
-		    yield return "solve";
-	    }
+	        yield return "solve";
         }
     }
 }
