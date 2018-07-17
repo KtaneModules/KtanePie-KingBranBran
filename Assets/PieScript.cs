@@ -307,6 +307,20 @@ public class PieScript : MonoBehaviour {
         var logData = string.Format(log, args);
         Debug.LogFormat("[Pie #{0}] {1}", _moduleId, logData);
     }
+	
+    public void TwitchHandleForcedSolve()
+    {
+	StartCoroutine(Solver());    
+    }
+	
+    private IEnumerator Solver()
+    {
+        for (int i = 0; i < 5; i++)
+	{
+	    buttons[buttonOrder[i]].OnInteract();
+	    yield return new WaitForSeconds(0.1f);
+	}
+    }
 
     private string TwitchHelpMessage = @"Use !{0} 1 4 5 3 2 to press the buttons in a certain order.";
 
